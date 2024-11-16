@@ -29,6 +29,16 @@ def logout():
 def register():
     return render_template('base.html', title="Register")
 
+@app.route('/register', methods=['POST'])
+def register_user():
+    username = request.form['username']
+    email = request.form['email']
+    password = request.form['password']
+    new_user = User(username=username, email=email, password=password)
+    db.session.add(new_user)
+    db.session.commit()
+    return redirect(url_for('home'))
+
 
 @app.route('/trade', methods=['GET'])
 def trade():
