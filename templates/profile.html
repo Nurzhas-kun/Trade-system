@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h1>{{ username }}'s Profile</h1>
+
+    <h2>Your Valorant Skins</h2>
+    <div class="skins-gallery">
+        {% for skin in valorant_skins %}
+            <div class="skin-card">
+                <img src="{{ skin['picture'] }}" alt="{{ skin['Name'] }}">
+                <h3>{{ skin['Name'] }}</h3>
+                <p>Cost: {{ skin['cost'] }}</p>
+                <p>Release Date: {{ skin['release_date'] }}</p>
+            </div>
+        {% else %}
+            <p>No Valorant skins in your inventory.</p>
+        {% endfor %}
+    </div>
+
+    <h2>Your CS2 Skins</h2>
+    <div class="skins-gallery">
+        {% for skin in cs2_skins %}
+            <div class="skin-card">
+                <img src="{{ skin['picture'] }}" alt="{{ skin['Name'] }}">
+                <h3>{{ skin['Name'] }}</h3>
+                <p>Cost: {{ skin['cost'] }}</p>
+                <p>Release Date: {{ skin['release_date'] }}</p>
+            </div>
+        {% else %}
+            <p>No CS2 skins in your inventory.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
