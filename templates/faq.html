@@ -1,10 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block content %}
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <title>FAQ</title>
+  <style>
+    body {
+      background-color: #1c1c2e;
+      color: #e0e0e0;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 100%;
+      margin: 50px auto;
+      background: #282828;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      padding: 20px;
+    }
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .header a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 0 10px;
+      transition: color 0.3s;
+    }
+    .header a:hover {
+      color: #8a2be2;
+    }
+    .header span {
+      padding: 0 10px;
+    }
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .question {
+      background-color: #333;
+      padding: 15px 20px;
+      margin: 10px 0;
+      cursor: pointer;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.3s;
+    }
+    .question:hover {
+      background-color: #444;
+    }
+    .question h3 {
+      margin: 0;
+      font-size: 1.2em;
+    }
+    .answer {
+      background-color: #3b3b3b;
+      padding: 15px 20px;
+      margin: 10px 0 0 0;
+      border-radius: 5px;
+      display: none;
+      font-size: 0.95em;
+    }
+    .arrow {
+      font-size: 1.2em; /* Make the arrow smaller */
+      transition: transform 0.3s;
+    }
+    .question.active .arrow {
+      transform: rotate(180deg);
+    }
+    .question.active .answer {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-
+  <div class="container">
+    <div class="header">
+      <a href="#">Home</a>
+      <span>&gt;</span>
+      <a href="#">FAQ</a>
+    </div>
+    <h1>FAQ</h1>
+    <div class="question" onclick="toggleAnswer(this)">
+      <h3>What skins do you sell and buy?</h3>
+      <span class="arrow">&#x25BC;</span>
+      <div class="answer">
+        <p>On our platform, you can buy and sell skins for CS2, Volorant. The price of skins is determined automatically. If you are selling a rare item and the price is not set automatically, please contact our technical support to agree on the price.</p>
+      </div>
+    </div>
+    <div class="question" onclick="toggleAnswer(this)">
+      <h3>What determines the price?</h3>
+      <span class="arrow">&#x25BC;</span>
+      <div class="answer">
+        <p>The price is calculated based on how much the item is worth on marketplaces for selling skins for real money. We do not base it on the Steam Market price.</p>
+      </div>
+    </div>
+    <div class="question" onclick="toggleAnswer(this)">
+      <h3>What skins can be traded?</h3>
+      <span class="arrow">&#x25BC;</span>
+      <div class="answer">
+        <p>All skins, including rare and exclusive ones.</p>
+      </div>
+    </div>
+    <div class="question" onclick="toggleAnswer(this)">
+      <h3>How can I contact support?</h3>
+      <span class="arrow">&#x25BC;</span>
+      <div class="answer">
+        <p>Please visit the "Contact Us" page, where you can reach out to our support team.</p>
+      </div>
+    </div>
+    <div class="question" onclick="toggleAnswer(this)">
+      <h3>How long does it take for support to respond?</h3>
+      <span class="arrow">&#x25BC;</span>
+      <div class="answer">
+        <p>Usually within 15 minutes.</p>
+      </div>
+    </div>
+    <div class="question" onclick="toggleAnswer(this)">
+      <h3>Why can not the site see my skins?</h3>
+      <span class="arrow">&#x25BC;</span>
+      <div class="answer">
+        <p>Try refreshing the site or waiting about 5 minutes in cases of high site traffic.</p>
+      </div>
+    </div>
+    <div class="question" onclick="toggleAnswer(this)">
+      <h3>Are games other than CS supported?</h3>
+      <span class="arrow">&#x25BC;</span>
+      <div class="answer">
+        <p>Yes, Valorant is also supported. In the future, we plan to add Dota 2, Overwatch 2, Rust, and League of Legends.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleAnswer(question) {
+      question.classList.toggle('active');
+      const answer = question.querySelector('.answer');
+      answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 </body>
-</html>
+    
+{% endblock %}
