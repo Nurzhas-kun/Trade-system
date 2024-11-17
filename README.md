@@ -17,16 +17,29 @@ Technologies used
 
 In order for everything to work for you, you first need to insert these codes into your empty mysql databaseCreate database:
 
+
 CREATE TABLE users ( user_id int NOT NULL AUTO_INCREMENT, username varchar(255) NOT NULL, email varchar(255) NOT NULL, balance int DEFAULT '0', password varchar(255) NOT NULL, PRIMARY KEY (user_id), UNIQUE KEY email (email) ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
 CREATE TABLE valskins ( id int NOT NULL AUTO_INCREMENT, picture varchar(255) NOT NULL, cost varchar(255) NOT NULL, release_date date NOT NULL, description text NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
 CREATE TABLE cs2skins ( id int NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, picture varchar(255) DEFAULT NULL, cost int DEFAULT NULL, release_date date DEFAULT NULL, description text, PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
 CREATE TABLE trade_offers ( offer_id int NOT NULL AUTO_INCREMENT, user_id_from int NOT NULL, skin_id_from int NOT NULL, user_id_to int NOT NULL, skin_id_to int NOT NULL, status enum('pending','accepted','rejected') DEFAULT 'pending', trade_date timestamp NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (offer_id), KEY user_id_from (user_id_from), KEY user_id_to (user_id_to), KEY skin_id_from (skin_id_from), KEY skin_id_to (skin_id_to), CONSTRAINT trade_offers_ibfk_1 FOREIGN KEY (user_id_from) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_2 FOREIGN KEY (user_id_to) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_3 FOREIGN KEY (skin_id_from) REFERENCES user_inventory (skin_id), CONSTRAINT trade_offers_ibfk_4 FOREIGN KEY (skin_id_to) REFERENCES user_inventory (skin_id) ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
 CREATE TABLE trade_offers ( offer_id int NOT NULL AUTO_INCREMENT, user_id_from int NOT NULL, skin_id_from int NOT NULL, user_id_to int NOT NULL, skin_id_to int NOT NULL, status enum('pending','accepted','rejected') DEFAULT 'pending', trade_date timestamp NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (offer_id), KEY user_id_from (user_id_from), KEY user_id_to (user_id_to), KEY skin_id_from (skin_id_from), KEY skin_id_to (skin_id_to), CONSTRAINT trade_offers_ibfk_1 FOREIGN KEY (user_id_from) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_2 FOREIGN KEY (user_id_to) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_3 FOREIGN KEY (skin_id_from) REFERENCES user_inventory (skin_id), CONSTRAINT trade_offers_ibfk_4 FOREIGN KEY (skin_id_to) REFERENCES user_inventory (skin_id) ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
 CREATE TABLE user_inventory ( inventory_id int NOT NULL AUTO_INCREMENT, user_id int NOT NULL, skin_id int NOT NULL, game enum('Valorant','CS2') NOT NULL, PRIMARY KEY (inventory_id), KEY user_id (user_id), KEY idx_skin_id (skin_id), CONSTRAINT user_inventory_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (user_id) ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 
 
-Create cs2 skins:
+                                          Create cs2 skins:
+
+
 INSERT INTO cs2skins (Name, picture, cost, release_date, description)
 VALUES ('StatTrak™ Glock-18 | Wasteland Rebel (Factory New)', 'https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposbaqKAxf0Ob3djFN79eJg4GYg_L4MrXVqXlU6sB9teXI8oThxlaxqhE_ZGj6I9OccFQ3YwmE-1C5x-u61sC0tM7JwSAy6ydx4XqOnxepwUYbufdxgq4', 3280.90, '2016-06-15', 'Glock-18 | Wasteland Rebel was added to the game on June 15, 2016, as part of The Gamma Collection, which was released alongside the “Gamma Exposure” update. The skin was created by SA_22.');
 
@@ -80,7 +93,12 @@ VALUES ('FAMAS | Pulse (Minimal Wear)', 'https://steamcommunity-a.akamaihd.net/e
 
 
 
-Create valskins:
+                                Create valskins:
+
+
+
+
+
 INSERT INTO valskins (Name, picture, cost, release_date, description)
 VALUES ('Prelude to Chaos Stinger', 'https://valorantstrike.com/wp-content/uploads/Valorant-Prelude-to-Chaos-Collection-Stinger-HD.jpg', 1433.32, '2022-06-22', 'The Valorant Prelude to Chaos Stinger is part of the Prelude to Chaos Collection and part of a five skin bundle released on June 22nd 2022. The full set includes the melee blade, Shorty pistol, Stinger, Vandal and Operator. Set in a striking purple, black and gold, the weapons are distinctive and detailed, each coming with three variants.');
 
