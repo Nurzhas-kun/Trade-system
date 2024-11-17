@@ -15,7 +15,17 @@ Technologies used
 • Frontend: HTML, CSS, Jinja2
 • Database: MySQL
 
+
+
+
+
+
+
 In order for everything to work for you, you first need to insert these codes into your empty mysql databaseCreate database:
+# reminder : to give the user balance you need to insert this command at the end after inserting all the codes below :
+
+ALTER TABLE users
+MODIFY balance INT DEFAULT 20000;
 
 
 CREATE TABLE users ( user_id int NOT NULL AUTO_INCREMENT, username varchar(255) NOT NULL, email varchar(255) NOT NULL, balance int DEFAULT '0', password varchar(255) NOT NULL, PRIMARY KEY (user_id), UNIQUE KEY email (email) ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
