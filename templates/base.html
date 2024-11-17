@@ -1,97 +1,39 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{{ title }}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-        }
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-        nav ul li {
-            margin: 0 10px;
-            position: relative;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 5px 10px;
-            transition: background-color 0.3s;
-        }
-        nav ul li a:hover {
-            background-color: #575757;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #333;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            left: 0;
-            top: 100%;
-        }
-        .dropdown-content a {
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            display: block;
-        }
-        .dropdown-content a:hover {
-            background-color: #575757;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        main {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Trading Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">
-                <a href="{{ url_for('home') }}" style="color:white; text-decoration:none;">My Flask App</a>
-            </div>
+        <nav class="navbar">
             <ul>
                 <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('marketplace') }}">Marketplace</a></li>
+                <li><a href="{{ url_for('faq') }}">FAQ</a></li>
                 <li><a href="{{ url_for('about_us') }}">About Us</a></li>
                 <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
-                <li><a href="{{ url_for('marketplace') }}">Marketplace</a></li>
-                <li><a href="{{ url_for('profile') }}">your inventory</a></li>
-                <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-                <li><a href="{{ url_for('sell') }}">Sell</a></li>
-                <li><a href="{{ url_for('trade') }}">Trade</a></li>
-                <li><a href="{{ url_for('buy') }}">Buy</a></li>
-                <li><a href="{{ url_for('logout') }}">logout</a></li>
-
-                    </div>
-                </li>
+                {% if 'user_id' in session %}
+                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                    <li><a href="{{ url_for('trade') }}">Trade</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
-    <main>
-        {% block content %}{% endblock %}
+
+    <main class="content-container">
+        {% block content %}
+        {% endblock %}
     </main>
+
+    <footer>
+        <p>© 2024 Skin Trading Platform</p>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="trade-container">
+    <h1>Create Trade Offer</h1>
+    <form method="POST" class="trade-form">
+        <div class="form-group">
+            <label for="skin_id_offered">Your Skin to Offer:</label>
+            <select name="skin_id_offered" class="form-control" required>
+                {% for skin in user_inventory %}
+                    <option value="{{ skin.skin_id }}">{{ skin.val_skin_name or skin.cs2_skin_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="skin_id_requested">Select Skin You Want:</label>
+            <select name="skin_id_requested" class="form-control" required>
+                {% for skin in available_skins %}
+                    <option value="{{ skin.skin_id }}">{{ skin.val_skin_name or skin.cs2_skin_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group"style="display: none;">
+
+            <select name="user_id_to" class="form-control" required>
+                {% for user in available_skins %}
+                    <option value="{{ user.user_id_from }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-submit">Submit Trade Offer</button>
+    </form>
+
+    <h2 class="section-header">Available Trade Offers</h2>
+    <a href="{{ url_for('view_trade_offers') }}" class="link">View Available Trade Offers</a>
+</div>
+{% endblock %}

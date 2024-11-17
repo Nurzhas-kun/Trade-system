@@ -1,10 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Marketplace{% endblock %}
+
+{% block content %}
+<div class="marketplace">
+    <h1>Marketplace</h1>
+    <p>Your Balance: {{ balance }}</p>
+
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <h3>Filter Skins</h3>
+        <input type="text" id="skinSearch" placeholder="Search skins by name...">
+        <input type="number" id="minCost" placeholder="Min cost">
+        <input type="number" id="maxCost" placeholder="Max cost">
+        <button id="filterButton">Apply Filters</button>
+    </div>
+
+    <!-- Valorant Skins Section -->
+    <h2>Valorant Skins</h2>
+    <table id="valorantSkins" class="skins-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Release Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for skin in valskins %}
+            <tr>
+                <td><img src="{{ skin['picture'] }}" alt="{{ skin['Name'] }}"></td>
+                <td>{{ skin['Name'] }}</td>
+                <td>R{{ skin['cost'] }}</td>
+                <td>{{ skin['release_date'] }}</td>
+                <td>
+                    <form action="{{ url_for('buy_skin') }}" method="POST">
+                        <input type="hidden" name="skin_id" value="{{ skin['id'] }}">
+                        <input type="hidden" name="game" value="Valorant">
+                        <button type="submit">Buy</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- CS2 Skins Section -->
+    <h2>CS2 Skins</h2>
+    <table id="cs2Skins" class="skins-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Release Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for skin in cs2skins %}
+            <tr>
+                <td><img src="{{ skin['picture'] }}" alt="{{ skin['name'] }}"></td>
+                <td>{{ skin['name'] }}</td>
+                <td>R{{ skin['cost'] }}</td>
+                <td>{{ skin['release_date'] }}</td>
+                <td>
+                    <form action="{{ url_for('buy_skin') }}" method="POST">
+                        <input type="hidden" name="skin_id" value="{{ skin['id'] }}">
+                        <input type="hidden" name="game" value="CS2">
+                        <button type="submit">Buy</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+<!-- Inline JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const filterButton = document.getElementById("filterButton");
+
+        filterButton.addEventListener("click", () => {
+            const searchQuery = document.getElementById("skinSearch").value.toLowerCase();
+            const minCost = parseFloat(document.getElementById("minCost").value) || 0;
+            const maxCost = parseFloat(document.getElementById("maxCost").value) || Infinity;
+
+            // Apply filter to Valorant skins
+            filterTable("valorantSkins", searchQuery, minCost, maxCost);
+
+            // Apply filter to CS2 skins
+            filterTable("cs2Skins", searchQuery, minCost, maxCost);
+        });
+    });
+
+    function filterTable(tableId, searchQuery, minCost, maxCost) {
+        const tableRows = document.querySelectorAll(`#${tableId} tbody tr`);
+    
+        tableRows.forEach(row => {
+            const skinName = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+            const skinCost = parseFloat(row.querySelector("td:nth-child(3)").textContent.replace("R", ""));
+    
+            // Check if the row matches the filter criteria
+            const matchesSearch = skinName.includes(searchQuery);
+            const matchesCost = skinCost >= minCost && skinCost <= maxCost;
+    
+            // Show/Hide rows based on filter criteria
+            if (matchesSearch && matchesCost) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+    </script>
+{% endblock %}

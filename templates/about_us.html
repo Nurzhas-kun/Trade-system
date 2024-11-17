@@ -1,10 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+<div class="about-container">
+    <h1>About Us</h1>
+    <p>Welcome to our platform! We are a team of three dedicated students who have combined our skills to create a seamless and secure skin trading experience. Here’s more about us:</p>
+
+    <div class="team-member">
+        <img src="/static/images/alikhan.jpg" alt="Alikhan's Avatar" class="avatar">
+        <h2>Alikhan</h2>
+        <p>Alikhan is responsible for backend development and database management. He ensures that the platform runs efficiently and that all user data is stored securely.</p>
+    </div>
+
+    <div class="team-member">
+        <img src="/static/images/assima.jpg" alt="Assima's Avatar" class="avatar">
+        <h2>Assima</h2>
+        <p>Assima handles front-end design and ensures the platform is visually appealing and intuitive for users. Her creativity ensures an enjoyable user experience.</p>
+    </div>
+
+    <div class="team-member">
+        <img src="/static/images/nurzhas.jpg" alt="Nurzhas's Avatar" class="avatar">
+        <h2>Nurzhas</h2>
+        <p>Nurzhas is a backend developer who designed the entire site, ensuring it functions flawlessly. His work brings together all the components of the platform seamlessly.</p>
+    </div>
+
+
+
+    <p>Together, we strive to provide gamers with the best skin trading platform possible. Thank you for trusting us with your trades!</p>
+</div>
+
+<style>
+    .about-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #282828;
+        color: #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+    .about-container h1 {
+        text-align: center;
+        color: #e94560;
+        margin-bottom: 20px;
+    }
+    .about-container p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .team-member {
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #1c1c2e;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+    }
+    .team-member h2 {
+        color: #8a2be2;
+        margin-top: 10px;
+    }
+    .team-member p {
+        margin: 10px 0 0 0;
+    }
+    .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid #8a2be2;
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}

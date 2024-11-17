@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Available Trade Offers</h2>
+    {% if trade_offers %}
+        <ul>
+        {% for offer in trade_offers %}
+            <li>
+                Offer by {{ offer.offer_user }}<br>
+                Offered Skin: <img src="{{ offer.offered_skin_picture }}" alt="{{ offer.offered_skin_name }}"><br>
+                Requested Skin: <img src="{{ offer.requested_skin_picture }}" alt="{{ offer.requested_skin_name }}"><br>
+                <form method="POST">
+                    <input type="hidden" name="offer_id" value="{{ offer.offer_id }}">
+                    <button type="submit">Accept Offer</button>
+                </form>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No available trade offers at the moment.</p>
+    {% endif %}
+
+{% endblock %}
