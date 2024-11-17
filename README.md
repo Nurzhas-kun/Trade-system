@@ -27,6 +27,7 @@ In order for everything to work for you, you first need to insert these codes in
 ALTER TABLE users
 MODIFY balance INT DEFAULT 20000;
 
+insert this command after creating tables
 
 
 
