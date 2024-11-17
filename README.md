@@ -28,13 +28,17 @@ ALTER TABLE users
 MODIFY balance INT DEFAULT 20000;
 
 
+
+
+
+
 CREATE TABLE users ( user_id int NOT NULL AUTO_INCREMENT, username varchar(255) NOT NULL, email varchar(255) NOT NULL, balance int DEFAULT '0', password varchar(255) NOT NULL, PRIMARY KEY (user_id), UNIQUE KEY email (email) ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 
-CREATE TABLE valskins ( id int NOT NULL AUTO_INCREMENT, picture varchar(255) NOT NULL, cost varchar(255) NOT NULL, release_date date NOT NULL, description text NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+CREATE TABLE valskins ( id int NOT NULL AUTO_INCREMENT, picture varchar(500) NOT NULL, cost varchar(255) NOT NULL, release_date date NOT NULL, description text NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 
-CREATE TABLE cs2skins ( id int NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, picture varchar(255) DEFAULT NULL, cost int DEFAULT NULL, release_date date DEFAULT NULL, description text, PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+CREATE TABLE cs2skins ( id int NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, picture varchar(500) DEFAULT NULL, cost int DEFAULT NULL, release_date date DEFAULT NULL, description text, PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 
 
