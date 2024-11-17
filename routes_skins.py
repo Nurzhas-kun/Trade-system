@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, session, flash
 from functools import wraps
-from database import get_db_connection
+from database import get_db_connection  # Импортируем функцию подключения к базе данных
 from werkzeug.security import check_password_hash
 
 def login_required(f):
@@ -34,7 +34,6 @@ def register_skins_routes(app):
 
         # Render the template with Valorant skins and user balance
         return render_template('valskins.html', valskins=valskins, balance=balance['balance'])
-
 
     @app.route('/cs2skins')
     @login_required
@@ -76,7 +75,7 @@ def register_skins_routes(app):
                 existing_skin = cursor.fetchone()
 
                 if existing_skin:
-                    
+                    flash("You already own this skin.", "error")
                     return redirect(url_for('marketplace'))
 
                 # Get the skin price based on the game (Valorant or CS2)
@@ -94,9 +93,9 @@ def register_skins_routes(app):
                     cursor.execute("SELECT balance FROM users WHERE user_id = %s", (user_id,))
                     user = cursor.fetchone()
 
-                    if int(user['balance']) >= int(skin['cost']):
+                    if float(user['balance']) >= float(skin['cost']):
                         # Update user's balance
-                        new_balance = int(user['balance']) - int(skin['cost'])
+                        new_balance = float(user['balance']) - float(skin['cost'])
                         cursor.execute("UPDATE users SET balance = %s WHERE user_id = %s", (new_balance, user_id))
 
                         # Add the skin to the user's inventory
@@ -104,7 +103,7 @@ def register_skins_routes(app):
                                        (user_id, skin_id, game))
 
                         connection.commit()
-                        
+                        flash("Skin purchased successfully!", "success")
                     else:
                         flash("Insufficient balance.", "error")
                 else:
@@ -183,7 +182,7 @@ def register_skins_routes(app):
                     """, (user_id, skin_id_offered, user_id_to, skin_id_requested))
                     connection.commit()
 
-                
+                flash('Trade offer created successfully!', 'success')
                 return redirect(url_for('trade'))
 
         finally:
@@ -241,7 +240,7 @@ def register_skins_routes(app):
                         """, (offer['user_id_from'], user_id, offer['skin_id_to']))
 
                         connection.commit()
-                        
+                        flash("Trade offer accepted and skins swapped!", "success")
                         return redirect(url_for('view_trade_offers'))
 
         finally:
@@ -272,7 +271,7 @@ def register_skins_routes(app):
                     existing_skin = cursor.fetchone()
 
                     if existing_skin:
-                   
+                        flash("You already own the requested skin!", "error")
                         return redirect(url_for('view_trade_offers'))
 
                     # Swap skins between the users
@@ -290,6 +289,7 @@ def register_skins_routes(app):
                     """, (trade_id,))
                     connection.commit()
 
+                    flash("Trade accepted! Skins swapped.", "success")
                     return redirect(url_for('view_trade_offers'))
 
         finally:
