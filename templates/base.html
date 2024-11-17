@@ -1,29 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Trading Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
     <header>
-        <nav>
-            <div class="logo">
-                <a href="{{ url_for('home') }}" style="color:white; text-decoration:none;">My Flask App</a>
-            </div>
+        <nav class="navbar">
             <ul>
                 <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('marketplace') }}">Marketplace</a></li>
+                <li><a href="{{ url_for('faq') }}">FAQ</a></li>
                 <li><a href="{{ url_for('about_us') }}">About Us</a></li>
                 <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
-                <li><a href="{{ url_for('marketplace') }}">Marketplace</a></li>
-                <li><a href="{{ url_for('profile') }}">your inventory</a></li>
-                <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-                <li><a href="{{ url_for('sell') }}">Sell</a></li>
-                <li><a href="{{ url_for('trade') }}">Trade</a></li>
-                <li><a href="{{ url_for('buy') }}">Buy</a></li>
-                <li><a href="{{ url_for('logout') }}">logout</a></li>
-
-                    </div>
-                </li>
+                {% if 'user_id' in session %}
+                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                    <li><a href="{{ url_for('trade') }}">Trade</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
-    <main>
-        {% block content %}{% endblock %}
+
+    <main class="content-container">
+        {% block content %}
+        {% endblock %}
     </main>
+
+    <footer>
+        <p>© 2024 Skin Trading Platform</p>
+    </footer>
 </body>
 </html>
 
