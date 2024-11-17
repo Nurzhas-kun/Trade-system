@@ -308,7 +308,7 @@ def register_skins_routes(app):
         with get_db_connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute("""
-                    SELECT valskins.id, valskins.picture, valskins.cost, valskins.release_date, valskins.description, valskins.name
+                    SELECT valskins.id, valskins.picture, valskins.cost, valskins.release_date, valskins.description, valskins.Name
                     FROM valskins
                     JOIN user_inventory ON user_inventory.skin_id = valskins.id
                     WHERE user_inventory.user_id = %s AND user_inventory.game = 'Valorant'
@@ -316,7 +316,7 @@ def register_skins_routes(app):
                 valorant_skins = cursor.fetchall()
 
                 cursor.execute("""
-                    SELECT cs2skins.id, cs2skins.picture, cs2skins.cost, cs2skins.release_date, cs2skins.description, cs2skins.name
+                    SELECT cs2skins.id, cs2skins.picture, cs2skins.cost, cs2skins.release_date, cs2skins.description, cs2skins.Name
                     FROM cs2skins
                     JOIN user_inventory ON user_inventory.skin_id = cs2skins.id
                     WHERE user_inventory.user_id = %s AND user_inventory.game = 'CS2'
