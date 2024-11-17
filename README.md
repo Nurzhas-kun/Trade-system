@@ -27,14 +27,12 @@ CREATE TABLE valskins ( id int NOT NULL AUTO_INCREMENT, picture varchar(255) NOT
 CREATE TABLE cs2skins ( id int NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, picture varchar(255) DEFAULT NULL, cost int DEFAULT NULL, release_date date DEFAULT NULL, description text, PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 
-CREATE TABLE trade_offers ( offer_id int NOT NULL AUTO_INCREMENT, user_id_from int NOT NULL, skin_id_from int NOT NULL, user_id_to int NOT NULL, skin_id_to int NOT NULL, status enum('pending','accepted','rejected') DEFAULT 'pending', trade_date timestamp NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (offer_id), KEY user_id_from (user_id_from), KEY user_id_to (user_id_to), KEY skin_id_from (skin_id_from), KEY skin_id_to (skin_id_to), CONSTRAINT trade_offers_ibfk_1 FOREIGN KEY (user_id_from) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_2 FOREIGN KEY (user_id_to) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_3 FOREIGN KEY (skin_id_from) REFERENCES user_inventory (skin_id), CONSTRAINT trade_offers_ibfk_4 FOREIGN KEY (skin_id_to) REFERENCES user_inventory (skin_id) ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
-
-
-CREATE TABLE trade_offers ( offer_id int NOT NULL AUTO_INCREMENT, user_id_from int NOT NULL, skin_id_from int NOT NULL, user_id_to int NOT NULL, skin_id_to int NOT NULL, status enum('pending','accepted','rejected') DEFAULT 'pending', trade_date timestamp NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (offer_id), KEY user_id_from (user_id_from), KEY user_id_to (user_id_to), KEY skin_id_from (skin_id_from), KEY skin_id_to (skin_id_to), CONSTRAINT trade_offers_ibfk_1 FOREIGN KEY (user_id_from) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_2 FOREIGN KEY (user_id_to) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_3 FOREIGN KEY (skin_id_from) REFERENCES user_inventory (skin_id), CONSTRAINT trade_offers_ibfk_4 FOREIGN KEY (skin_id_to) REFERENCES user_inventory (skin_id) ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
-
 
 CREATE TABLE user_inventory ( inventory_id int NOT NULL AUTO_INCREMENT, user_id int NOT NULL, skin_id int NOT NULL, game enum('Valorant','CS2') NOT NULL, PRIMARY KEY (inventory_id), KEY user_id (user_id), KEY idx_skin_id (skin_id), CONSTRAINT user_inventory_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (user_id) ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
+
+
+CREATE TABLE trade_offers ( offer_id int NOT NULL AUTO_INCREMENT, user_id_from int NOT NULL, skin_id_from int NOT NULL, user_id_to int NOT NULL, skin_id_to int NOT NULL, status enum('pending','accepted','rejected') DEFAULT 'pending', trade_date timestamp NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (offer_id), KEY user_id_from (user_id_from), KEY user_id_to (user_id_to), KEY skin_id_from (skin_id_from), KEY skin_id_to (skin_id_to), CONSTRAINT trade_offers_ibfk_1 FOREIGN KEY (user_id_from) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_2 FOREIGN KEY (user_id_to) REFERENCES users (user_id), CONSTRAINT trade_offers_ibfk_3 FOREIGN KEY (skin_id_from) REFERENCES user_inventory (skin_id), CONSTRAINT trade_offers_ibfk_4 FOREIGN KEY (skin_id_to) REFERENCES user_inventory (skin_id) ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 
                                           Create cs2 skins:
