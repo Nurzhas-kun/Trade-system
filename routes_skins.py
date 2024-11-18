@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, session, flash
 from functools import wraps
-from database import get_db_connection  # Импортируем функцию подключения к базе данных
+from database import get_db_connection  
 from werkzeug.security import check_password_hash
 
 def login_required(f):
@@ -93,9 +93,9 @@ def register_skins_routes(app):
                     cursor.execute("SELECT balance FROM users WHERE user_id = %s", (user_id,))
                     user = cursor.fetchone()
 
-                    if float(user['balance']) >= float(skin['cost']):
+                    if int(user['balance']) >= int(skin['cost']):
                         # Update user's balance
-                        new_balance = float(user['balance']) - float(skin['cost'])
+                        new_balance = int(user['balance']) - int(skin['cost'])
                         cursor.execute("UPDATE users SET balance = %s WHERE user_id = %s", (new_balance, user_id))
 
                         # Add the skin to the user's inventory
@@ -164,22 +164,22 @@ def register_skins_routes(app):
                     FROM user_inventory ui
                     LEFT JOIN valskins v ON ui.skin_id = v.id AND ui.game = 'Valorant'
                     LEFT JOIN cs2skins cs ON ui.skin_id = cs.id AND ui.game = 'CS2'
-                    WHERE ui.user_id != %s AND ui.skin_id NOT IN (SELECT skin_id FROM user_inventory WHERE user_id = %s)
-                """, (user_id, user_id))
+                    WHERE ui.user_id != %s 
+                """, (user_id))
                 available_skins = cursor.fetchall()
 
             # Handle form submission for trade offer creation
             if request.method == 'POST':
                 skin_id_offered = request.form['skin_id_offered']
                 skin_id_requested = request.form['skin_id_requested']
-                user_id_to = request.form['user_id_to']  # The user ID of the user you want to trade with
+               
 
                 with connection.cursor() as cursor:
                     # Insert the trade offer into the database
                     cursor.execute("""
-                        INSERT INTO trade_offers (user_id_from, skin_id_from, user_id_to, skin_id_to, status)
-                        VALUES (%s, %s, %s, %s, 'pending')
-                    """, (user_id, skin_id_offered, user_id_to, skin_id_requested))
+                        INSERT INTO trade_offers (user_id_from, skin_id_from, skin_id_to, status)
+                        VALUES (%s, %s, %s, 'pending')
+                    """, (user_id, skin_id_offered,  skin_id_requested))
                     connection.commit()
 
                 flash('Trade offer created successfully!', 'success')
@@ -211,9 +211,9 @@ def register_skins_routes(app):
                     JOIN users ON trade_offers.user_id_from = users.user_id
                     LEFT JOIN valskins ON trade_offers.skin_id_from = valskins.id
                     LEFT JOIN cs2skins ON trade_offers.skin_id_to = cs2skins.id
-                    WHERE trade_offers.user_id_to = %s AND trade_offers.status = 'pending'
-                    OR trade_offers.user_id_from = %s AND trade_offers.status = 'pending'
-                """, (user_id, user_id))
+                    WHERE (trade_offers.user_id_to IS NULL OR trade_offers.user_id_to = %s) 
+                    AND trade_offers.status = 'pending'
+                """, (user_id))
 
                 trade_offers = cursor.fetchall()
 
