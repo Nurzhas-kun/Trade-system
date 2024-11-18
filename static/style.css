@@ -278,3 +278,154 @@ h1 {
     color: #ccc;
     margin: 5px 0;
 }
+
+
+
+
+/* General Container */
+.trade-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #2c2f33;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Title Styling */
+.trade-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ff5555;
+}
+
+/* Form Styling */
+.trade-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #cccccc;
+}
+
+select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    background-color: #23272a;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+/* Button Styling */
+.submit-btn {
+    padding: 10px 20px;
+    background-color: #7289da;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #5865f2;
+}
+
+/* Container for Trade Offers */
+.trade-offers-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #2c2f33;
+    border-radius: 10px;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Title Styling */
+.offers-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ff5555;
+}
+
+/* Offers List */
+.offers-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Individual Offer Card */
+.offer-card {
+    background-color: #23272a;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Skin Section */
+.skins-section {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.skin-info {
+    text-align: center;
+}
+
+.skin-image {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Accept Form and Button */
+.accept-form {
+    margin-top: 10px;
+}
+
+.accept-btn {
+    padding: 10px 15px;
+    background-color: #7289da;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accept-btn:hover {
+    background-color: #5865f2;
+}
+
+/* Message for No Offers */
+.no-offers-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #cccccc;
+    margin-top: 20px;
+}
+
+
