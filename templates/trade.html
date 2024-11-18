@@ -17,12 +17,6 @@
             {% endfor %}
         </select><br>
     
-        <label for="user_id_to">User You Want to Trade With:</label>
-        <select name="user_id_to" required>
-            {% for user in available_skins %}
-                <option value="{{ user.user_id_from }}">{{ user.username }}</option>
-            {% endfor %}
-        </select><br>
     
         <button type="submit">Submit Trade Offer</button>
     </form>
@@ -32,11 +26,4 @@
     <h2>Available Trade Offers</h2>
     <a href="{{ url_for('view_trade_offers') }}">View Available Trade Offers</a>
 
-    <script>
-        // This script automatically adds the user ID of the selected skin owner to the form
-        document.querySelector('select[name="skin_id_requested"]').addEventListener('change', function() {
-            var userId = this.options[this.selectedIndex].getAttribute('data-user-id');
-            document.getElementById('user_id_to').value = userId;
-        });
-    </script>
 {% endblock %}
