@@ -1,29 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Create Trade Offer</h1>
-    <form method="POST">
-        <label for="skin_id_offered">Your Skin to Offer:</label>
-        <select name="skin_id_offered" required>
-            {% for skin in user_inventory %}
-                <option value="{{ skin.skin_id }}">{{ skin.val_skin_name or skin.cs2_skin_name }}</option>
-            {% endfor %}
-        </select><br>
-    
-        <label for="skin_id_requested">Select Skin You Want:</label>
-        <select name="skin_id_requested" required>
-            {% for skin in available_skins %}
-                <option value="{{ skin.skin_id }}">{{ skin.val_skin_name or skin.cs2_skin_name }}</option>
-            {% endfor %}
-        </select><br>
-    
-    
-        <button type="submit">Submit Trade Offer</button>
+<div class="trade-container">
+    <h1 class="trade-title">Create Trade Offer</h1>
+    <form class="trade-form" method="POST">
+        <div class="form-group">
+            <label for="skin_id_offered">Your Skin to Offer:</label>
+            <select name="skin_id_offered" required>
+                {% for skin in user_inventory %}
+                    <option value="{{ skin.skin_id }}">{{ skin.val_skin_name or skin.cs2_skin_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="skin_id_requested">Select Skin You Want:</label>
+            <select name="skin_id_requested" required>
+                {% for skin in available_skins %}
+                    <option value="{{ skin.skin_id }}">{{ skin.val_skin_name or skin.cs2_skin_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Submit Trade Offer</button>
+        </div>
     </form>
 
-    <br>
-    
-    <h2>Available Trade Offers</h2>
-    <a href="{{ url_for('view_trade_offers') }}">View Available Trade Offers</a>
-
+    <div class="offers-section">
+        <h2>Available Trade Offers</h2>
+        <a href="{{ url_for('view_trade_offers') }}" class="view-offers-link">View Available Trade Offers</a>
+    </div>
+</div>
 {% endblock %}
