@@ -165,7 +165,7 @@ def register_skins_routes(app):
                     LEFT JOIN valskins v ON ui.skin_id = v.id AND ui.game = 'Valorant'
                     LEFT JOIN cs2skins cs ON ui.skin_id = cs.id AND ui.game = 'CS2'
                     WHERE ui.user_id != %s 
-                """, (user_id))
+                """, (user_id,))
                 available_skins = cursor.fetchall()
 
             # Handle form submission for trade offer creation
@@ -213,7 +213,7 @@ def register_skins_routes(app):
                     LEFT JOIN cs2skins ON trade_offers.skin_id_to = cs2skins.id
                     WHERE (trade_offers.user_id_to IS NULL OR trade_offers.user_id_to = %s) 
                     AND trade_offers.status = 'pending'
-                """, (user_id))
+                """, (user_id,))
 
                 trade_offers = cursor.fetchall()
 
