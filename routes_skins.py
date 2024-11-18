@@ -93,9 +93,9 @@ def register_skins_routes(app):
                     cursor.execute("SELECT balance FROM users WHERE user_id = %s", (user_id,))
                     user = cursor.fetchone()
 
-                    if int(user['balance']) >= int(skin['cost']):
+                    if float(user['balance']) >= float(skin['cost']):
                         # Update user's balance
-                        new_balance = int(user['balance']) - int(skin['cost'])
+                        new_balance = float(user['balance']) - float(skin['cost'])
                         cursor.execute("UPDATE users SET balance = %s WHERE user_id = %s", (new_balance, user_id))
 
                         # Add the skin to the user's inventory
